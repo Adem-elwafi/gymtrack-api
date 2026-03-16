@@ -9,13 +9,9 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String firstName;
     private String lastName;
-
-    @Column(unique = true)
     private String email;
-
     private LocalDate registrationDate;
 
     @Enumerated(EnumType.STRING)
@@ -23,5 +19,25 @@ public class Member {
 
     private boolean isActive = true;
 
-    // Pense à générer les Getters/Setters (Alt+Insert dans IntelliJ)
+    // --- AJOUTE LES GETTERS ET SETTERS ICI ---
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public LocalDate getRegistrationDate() { return registrationDate; }
+    public void setRegistrationDate(LocalDate registrationDate) { this.registrationDate = registrationDate; }
+
+    public MembershipType getMembershipType() { return membershipType; }
+    public void setMembershipType(MembershipType membershipType) { this.membershipType = membershipType; }
+
+    public boolean isActive() { return isActive; } // Getter pour boolean commence souvent par "is"
+    public void setActive(boolean active) { isActive = active; }
 }
