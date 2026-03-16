@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/members")
 public class MemberController {
@@ -18,6 +20,11 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<MemberResponse>> getAll() {
+        return ResponseEntity.ok(memberService.getAllMembers());
+
+    }
     @PostMapping
     public ResponseEntity<MemberResponse> create(@RequestBody @Valid MemberRequest request) {
         MemberResponse response = memberService.createMember(request);

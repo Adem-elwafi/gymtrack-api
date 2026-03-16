@@ -6,6 +6,8 @@ import com.gymtrack.gymtrack_api.model.Member;
 import com.gymtrack.gymtrack_api.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
+import java.util.List ;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
@@ -37,5 +39,20 @@ public class MemberService {
                 savedMember.getRegistrationDate(),
                 savedMember.isActive()
         );
+
+    }
+
+    public List<MemberResponse> getAllMembers() {
+        return memberRepository.findAll()
+                .stream()
+                .map(member -> new MemberResponse(
+                        member.getId(),
+                        member.getFirstName() + " " + member.getLastName(),
+                        member.getEmail(),
+                        member.getMembershipType(),
+                        member.getRegistrationDate(),
+                        member.isActive()
+                ))
+                .collect(Collectors.toList());
     }
 }
