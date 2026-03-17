@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/members")
+
 public class MemberController {
 
     private final MemberService memberService;
@@ -24,6 +25,10 @@ public class MemberController {
     public ResponseEntity<List<MemberResponse>> getAll() {
         return ResponseEntity.ok(memberService.getAllMembers());
 
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<MemberResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(memberService.getMemberById(id));
     }
     @PostMapping
     public ResponseEntity<MemberResponse> create(@RequestBody @Valid MemberRequest request) {

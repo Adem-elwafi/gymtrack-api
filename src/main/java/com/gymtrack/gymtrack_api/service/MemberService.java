@@ -41,7 +41,18 @@ public class MemberService {
         );
 
     }
-
+    public MemberResponse getMemberById(Long id) {
+        return memberRepository.findById(id)
+                .map(member -> new MemberResponse(
+                        member.getId(),
+                        member.getFirstName() + " " + member.getLastName(),
+                        member.getEmail(),
+                        member.getMembershipType(),
+                        member.getRegistrationDate(),
+                        member.isActive()
+                ))
+                .orElseThrow(() -> new RuntimeException("Membre non trouvé avec l'id : " + id));
+    }
     public List<MemberResponse> getAllMembers() {
         return memberRepository.findAll()
                 .stream()
