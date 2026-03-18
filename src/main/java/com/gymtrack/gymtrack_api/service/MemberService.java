@@ -53,6 +53,24 @@ public class MemberService {
                 ))
                 .orElseThrow(() -> new RuntimeException("Membre non trouvé avec l'id : " + id));
     }
+    public MemberResponse updateMember(Long id, MemberRequest request) {
+        // 1. Chercher le membre ou lancer une erreur s'il n'existe pas
+        Member existingMember = memberRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Impossible de modifier : Membre non trouvé avec l'id " + id));
+
+        // 2. Mise à jour des champs avec les données du DTO
+        existingMember.setFirstName(request.firstName());
+        existingMember.setLastName(request.lastName());
+        existingMember.setEmail(request.email());
+        existingMember.setMembershipType(request.membershipType());
+
+        // 3. Sauvegarder les modifications
+        Member updatedMember = memberRepository.save(existingMember);
+
+        // 4. Retourner le DTO de réponse
+        return mapToResponse(updatedMember);
+    }
+
     public List<MemberResponse> getAllMembers() {
         return memberRepository.findAll()
                 .stream()

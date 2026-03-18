@@ -35,4 +35,8 @@ public class MemberController {
         MemberResponse response = memberService.createMember(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<MemberResponse> update(@PathVariable Long id, @Valid @RequestBody MemberRequest request) {
+        return ResponseEntity.ok(memberService.updateMember(id, request));
+    }
 }
