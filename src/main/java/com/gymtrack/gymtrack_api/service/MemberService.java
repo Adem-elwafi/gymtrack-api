@@ -84,4 +84,16 @@ public class MemberService {
                 ))
                 .collect(Collectors.toList());
     }
+
+        // À ajouter à la fin de la classe MemberService
+        private MemberResponse mapToResponse(Member member) {
+            return new MemberResponse(
+                    member.getId(),
+                    member.getFirstName() + " " + member.getLastName(),
+                    member.getEmail(),
+                    member.getMembershipType(),
+                    member.getRegistrationDate(),
+                    member.isActive()
+            );
+        }
 }
