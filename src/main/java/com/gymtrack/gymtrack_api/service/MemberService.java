@@ -96,4 +96,12 @@ public class MemberService {
                     member.isActive()
             );
         }
+        public void deleteMember(Long id) {
+            // 1. Vérification de l'existence
+            if (!memberRepository.existsById(id)) {
+                throw new RuntimeException("Suppression impossible : Membre non trouvé avec l'id " + id);
+            }
+            // 2. Suppression physique en base de données
+            memberRepository.deleteById(id);
+        }
 }

@@ -39,4 +39,9 @@ public class MemberController {
     public ResponseEntity<MemberResponse> update(@PathVariable Long id, @Valid @RequestBody MemberRequest request) {
         return ResponseEntity.ok(memberService.updateMember(id, request));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        memberService.deleteMember(id);
+        return ResponseEntity.noContent().build(); // Retourne un code 204 No Content
+    }
 }
